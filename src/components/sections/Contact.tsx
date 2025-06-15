@@ -24,7 +24,7 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-brand-blue text-white">
+    <section id="contact" className="py-20 bg-brand-blue text-white overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold">Contact Us</h2>
@@ -33,18 +33,20 @@ const Contact = () => {
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {contactDetails.map((detail) => (
-            <Card key={detail.title} className="bg-white/5 border-white/10 text-center">
-              <CardContent className="p-8">
-                <div className="flex justify-center mb-4">{detail.icon}</div>
-                <h3 className="text-xl font-bold text-brand-gold mb-2">{detail.title}</h3>
-                {detail.href ? (
-                  <a href={detail.href} className="text-gray-200 hover:text-white transition-colors">{detail.info}</a>
-                ) : (
-                  <p className="text-gray-200">{detail.info}</p>
-                )}
-              </CardContent>
-            </Card>
+          {contactDetails.map((detail, index) => (
+            <div key={detail.title} className="animate-fade-in" style={{ animationDelay: `${index * 0.2}s`, animationFillMode: 'backwards' }}>
+              <Card className="bg-white/5 border-white/10 text-center h-full transition-transform duration-300 hover:-translate-y-2">
+                <CardContent className="p-8 flex flex-col items-center justify-center">
+                  <div className="flex justify-center mb-4">{detail.icon}</div>
+                  <h3 className="text-xl font-bold text-brand-gold mb-2">{detail.title}</h3>
+                  {detail.href ? (
+                    <a href={detail.href} className="text-gray-200 hover:text-white transition-colors">{detail.info}</a>
+                  ) : (
+                    <p className="text-gray-200">{detail.info}</p>
+                  )}
+                </CardContent>
+              </Card>
+            </div>
           ))}
         </div>
       </div>
