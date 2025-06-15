@@ -1,12 +1,13 @@
 
 import { ShieldCheck } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const serviceLinks = [
-    { href: "#services", label: "Cyber Security & Digital Forensics" },
-    { href: "#services", label: "Risk Management" },
-    { href: "#services", label: "Internal IT Audit" },
-    { href: "#services", label: "Cyber Security Training & Awareness" },
+    { href: "/#services", label: "Cyber Security & Digital Forensics" },
+    { href: "/#services", label: "Risk Management" },
+    { href: "/#services", label: "Internal IT Audit" },
+    { href: "/#services", label: "Cyber Security Training & Awareness" },
   ];
 
   return (
@@ -14,10 +15,10 @@ const Footer = () => {
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-1">
-            <a href="#" className="flex items-center gap-2 mb-4">
+            <Link to="/" className="flex items-center gap-2 mb-4">
               <ShieldCheck className="h-8 w-8 text-brand-gold" />
               <span className="text-2xl font-bold">NextFlex</span>
-            </a>
+            </Link>
             <p className="text-sm text-gray-300">
               Specialist cyber security and technology advisory company.
             </p>
@@ -37,8 +38,11 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="font-bold text-lg mb-4 text-brand-gold">Legal</h3>
+            <h3 className="font-bold text-lg mb-4 text-brand-gold">Company</h3>
             <ul className="space-y-2">
+              <li><a href="/#about" className="text-gray-300 hover:text-white transition-colors text-sm">About Us</a></li>
+              <li><a href="/#team" className="text-gray-300 hover:text-white transition-colors text-sm">Team</a></li>
+              <li><Link to="/case-studies" className="text-gray-300 hover:text-white transition-colors text-sm">Case Studies</Link></li>
               <li>
                 <a href="#" className="text-gray-300 hover:text-white transition-colors text-sm">
                   PoPIA Terms and Conditions

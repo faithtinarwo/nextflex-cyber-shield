@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { ShieldCheck, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,27 +19,34 @@ const Header = () => {
   }, []);
 
   const navLinks = [
-    { href: '#about', label: 'About' },
-    { href: '#services', label: 'Services' },
-    { href: '#team', label: 'Team' },
-    { href: '#testimonials', label: 'Testimonials' },
-    { href: '#contact', label: 'Contact Us' },
+    { href: '/#about', label: 'About' },
+    { href: '/#services', label: 'Services' },
+    { href: '/#team', label: 'Team' },
+    { href: '/#testimonials', label: 'Testimonials' },
+    { href: '/case-studies', label: 'Case Studies' },
+    { href: '/#contact', label: 'Contact Us' },
   ];
+
+  const renderLink = (link: { href: string; label: string }, isMobile = false) => {
+    const className = `text-white hover:text-brand-gold transition-colors font-medium ${isMobile ? 'text-lg' : ''}`;
+    if (link.href.startsWith('/#')) {
+      return <a href={link.href} className={className} onClick={() => isMobile && setIsMenuOpen(false)}>{link.label}</a>;
+    }
+    return <Link to={link.href} className={className} onClick={() => isMobile && setIsMenuOpen(false)}>{link.label}</Link>;
+  };
 
   return (
     <header className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-brand-blue/95 backdrop-blur-sm shadow-lg' : 'bg-transparent'}`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
-          <a href="#" className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2">
             <ShieldCheck className="h-8 w-8 text-brand-gold" />
             <span className="text-2xl font-bold text-white">NextFlex</span>
-          </a>
+          </Link>
 
           <nav className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => (
-              <a key={link.href} href={link.href} className="text-white hover:text-brand-gold transition-colors font-medium">
-                {link.label}
-              </a>
+              <div key={link.href}>{renderLink(link)}</div>
             ))}
           </nav>
 
@@ -54,9 +62,7 @@ const Header = () => {
         <div className="md:hidden bg-brand-blue pb-4">
           <nav className="flex flex-col items-center gap-4">
              {navLinks.map((link) => (
-              <a key={link.href} href={link.href} onClick={() => setIsMenuOpen(false)} className="text-white hover:text-brand-gold transition-colors font-medium text-lg">
-                {link.label}
-              </a>
+              <div key={link.href}>{renderLink(link, true)}</div>
             ))}
           </nav>
         </div>
